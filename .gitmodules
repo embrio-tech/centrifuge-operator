@@ -1,0 +1,12 @@
+[submodule "centrifuge-influx"]
+	path = centrifuge-influx
+	url = git@github.com:embrio-tech/centrifuge-influx.git
+	branch = main
+[submodule "centrifuge-outflux"]
+	path = centrifuge-outflux
+	url = git@github.com:embrio-tech/centrifuge-outflux.git
+	branch = main
+[submodule "centrifuge-pod"]
+	path = centrifuge-pod
+	url = git@github.com:embrio-tech/centrifuge-outflux.git
+	branch = main
