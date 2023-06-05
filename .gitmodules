@@ -6,7 +6,3 @@
 	path = centrifuge-outflux
 	url = git@github.com:embrio-tech/centrifuge-outflux.git
 	branch = main
-[submodule "centrifuge-pod"]
-	path = centrifuge-pod
-	url = git@github.com:embrio-tech/centrifuge-outflux.git
-	branch = main

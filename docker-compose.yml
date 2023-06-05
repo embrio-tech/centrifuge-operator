@@ -1,0 +1,62 @@
+version: '3'
+
+volumes:
+  blenderDb:
+
+services:
+  pod:
+    image: centrifuge-pod
+    build:
+      context: ./centrifuge-pod
+      dockerfile: Dockerfile
+
+  blender-db:
+    image: mongo
+    volumes:
+      - blenderDb:/data/db
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${BLENDER_DB_USER}
+      MONGO_INITDB_ROOT_PASSWORD: ${BLENDER_DB_PASS}
+      MONGO_INITDB_DATABASE: blender
+
+  blender-influx:
+    image: centrifuge-influx
+    build:
+      context: ./centrifuge-influx
+      dockerfile: Dockerfile
+      target: install
+    volumes:
+      - ./centrifuge-influx:/usr/src/app
+      - /usr/src/app/node_modules
+    ports: []
+    #  - 9229:9229
+    depends_on:
+      - blender-db
+    environment:
+      DB_URI: 'mongodb://${BLENDER_DB_USER}:${BLENDER_DB_PASS}@blender-db:27017/blender?authSource=admin'
+      POOL_ID: '3317493590'
+    tty: true # makes the service logs colorful
+    command: yarn develop
+
+  blender-outflux:
+    image: centrifuge-outflux
+    build:
+      context: ./centrifuge-outflux
+      dockerfile: Dockerfile
+      target: install
+    volumes:
+      - ./centrifuge-outflux:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - 5010:5000
+      - 9229:9229
+    depends_on:
+      - blender-db
+    environment:
+      DB_URI: 'mongodb://${BLENDER_DB_USER}:${BLENDER_DB_PASS}@blender-db:27017/blender?authSource=admin'
+      LOGGER_LEVEL: debug
+      API_KEY: supersecret
+    tty: true # makes the service logs colorful
+    command: yarn develop:debug
