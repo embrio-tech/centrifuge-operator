@@ -11,6 +11,11 @@ Centrifuge Operator is a GitHub repository that provides a Docker Compose setup 
 
 To get started with Centrifuge Operator and set up the environment, follow these steps:
 
+1. Clone the repo including the submodules with:
+    ```
+    git clone --recurse-submodules git@github.com:embrio-tech/centrifuge-operator.git
+    ```
+
 1. Copy the example environment file:
     ```
     cp .env.example .env
