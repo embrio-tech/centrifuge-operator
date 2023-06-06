@@ -1,5 +1,9 @@
 # Centrifuge Operator
 
+[![Docker](https://img.shields.io/static/v1?label=shipped+with&message=Docker&color=287cf9)](https://www.docker.com/)
+[![embrio.tech](https://img.shields.io/static/v1?label=by&message=EMBRIO.tech&color=24ae5f)](https://embrio.tech)
+[![Centrifuge](https://img.shields.io/static/v1?label=for&message=Centrifuge&color=2762ff)](https://centrifuge.io/)
+
 Centrifuge Operator is a GitHub repository that provides a Docker Compose setup to run all the required services for a pool operator to analyze their own pools. This setup includes the following services:
 
 - `blender-influx`: A microservice that crawls data about assets from on-chain and off-chain sources.
