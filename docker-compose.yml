@@ -22,10 +22,7 @@ services:
       MONGO_INITDB_DATABASE: blender
 
   blender-influx:
-    image: centrifuge-influx
-    build:
-      context: ./centrifuge-influx
-      dockerfile: Dockerfile
+    image: ghcr.io/embrio-tech/centrifuge-influx:main
     ports: []
     #  - 9229:9229
     depends_on:
@@ -37,10 +34,7 @@ services:
       OPERATOR_ADDRESS: ${OPERATOR_ADDRESS}
 
   blender-outflux:
-    image: centrifuge-outflux
-    build:
-      context: ./centrifuge-outflux
-      dockerfile: Dockerfile
+    image: ghcr.io/embrio-tech/centrifuge-outflux:main
     ports:
       - 5010:5000
       - 9229:9229
