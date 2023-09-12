@@ -26,10 +26,6 @@ services:
     build:
       context: ./centrifuge-influx
       dockerfile: Dockerfile
-      target: install
-    volumes:
-      - ./centrifuge-influx:/usr/src/app
-      - /usr/src/app/node_modules
     ports: []
     #  - 9229:9229
     depends_on:
@@ -39,18 +35,12 @@ services:
       POOL_ID: ${POOL_ID}
       PROXY_KEYRING_URI: ${PROXY_KEYRING_URI}
       OPERATOR_ADDRESS: ${OPERATOR_ADDRESS}
-    tty: true # makes the service logs colorful
-    command: yarn develop
 
   blender-outflux:
     image: centrifuge-outflux
     build:
       context: ./centrifuge-outflux
       dockerfile: Dockerfile
-      target: install
-    volumes:
-      - ./centrifuge-outflux:/usr/src/app
-      - /usr/src/app/node_modules
     ports:
       - 5010:5000
       - 9229:9229
@@ -59,6 +49,4 @@ services:
     environment:
       DB_URI: 'mongodb://${BLENDER_DB_USER}:${BLENDER_DB_PASS}@blender-db:27017/blender?authSource=admin'
       LOGGER_LEVEL: debug
-      API_KEY: supersecret
-    tty: true # makes the service logs colorful
-    command: yarn develop:debug
+      API_KEY: ${BLENDER_API_SECRET}
