@@ -5,10 +5,7 @@ volumes:
 
 services:
   pod:
-    image: centrifuge-pod
-    build:
-      context: ./centrifuge-pod
-      dockerfile: Dockerfile
+    image: centrifugeio/pod:centapi-improve-logging-2023090616-a9c22319
 
   blender-db:
     image: mongo
